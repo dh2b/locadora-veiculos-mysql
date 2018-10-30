@@ -2,9 +2,13 @@ package br.com.tt.projeto01.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +33,12 @@ public class VeiculoController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(Veiculo veiculo, Model model) {
-
+	public String salvar(@Valid Veiculo veiculo, Model model, BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("veiculo", veiculo);
+			return templates + "/formulario";
+		}
 		String placa = veiculo.getPlaca();
 
 		placa = placa.toUpperCase();
