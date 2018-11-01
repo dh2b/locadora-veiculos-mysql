@@ -13,8 +13,11 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Campo obrigatório!")
 	private String marca;
+	@NotBlank(message = "Campo obrigatório!")
 	private String modelo;
+	@NotBlank(message = "Campo obrigatório!")
 	private String cor;
 	/*
 	 * O campo placa no banco de dados será configurado como NOT NULL sempre precisa
